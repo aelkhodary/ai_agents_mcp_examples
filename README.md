@@ -71,6 +71,70 @@ uv run ch3/08_make_tool_calls/agent.py
 uv run ch3/calculator_server.py
 ```
 
+## Virtual Environment Setup
+
+### Quick Setup with uv
+
+```bash
+# Create virtual environment
+uv venv
+
+# Install all dependencies
+uv sync
+```
+
+### Activate the venv Manually
+
+If you prefer to activate the virtual environment manually instead of using `uv run`:
+
+**Windows (PowerShell):**
+```powershell
+# Activate
+.venv\Scripts\activate
+
+# Run examples directly
+python ch3/01_host_no_client.py
+
+# Deactivate when done
+deactivate
+```
+
+**Windows (Command Prompt):**
+```cmd
+# Activate
+.venv\Scripts\activate.bat
+
+# Run examples directly
+python ch3/01_host_no_client.py
+
+# Deactivate when done
+deactivate
+```
+
+**Linux/macOS/WSL:**
+```bash
+# Activate
+source .venv/bin/activate
+
+# Run examples directly
+python ch3/01_host_no_client.py
+
+# Deactivate when done
+deactivate
+```
+
+### Installed Packages Summary
+
+After running `uv sync`, the following main packages are installed:
+
+| Package | Version | Description |
+|---------|---------|-------------|
+| anthropic | 0.71.0+ | Anthropic's Python SDK for Claude |
+| mcp | 1.19.0+ | Model Context Protocol SDK |
+| pydantic | 2.12.0+ | Data validation |
+| pillow | 12.0.0+ | Image processing |
+| python-dotenv | 1.1.0+ | Environment variable management |
+
 ## Chapter Overview
 
 ### Chapter 3: Building MCP Clients
