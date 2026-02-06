@@ -202,3 +202,56 @@ See [LICENSE](LICENSE) for details.
 ## Contributing
 
 Contributions are welcome! Please feel free to submit issues and pull requests.
+
+
+```html
+  This is a MCP (Model Context Protocol) educational codebase - a comprehensive collection of progressive examples for building AI agents that communicate with tools, resources, and prompts.
+
+  Summary
+
+  Purpose: Teaching how to build MCP clients (hosts) and servers, progressing from basics to advanced features.
+  Structure:
+
+  | Chapter | Topic                    | Examples                | 
+  |---------|--------------------------|-------------------------|
+  | ch3/    | Building MCP Clients     | 13 progressive examples | 
+  | ch4/    | Advanced Client Features | 6 examples              | 
+  | ch5/    | Building MCP Servers     | 14 examples             | 
+  | ch6/    | Advanced Server Features | 16 examples             | 
+
+  Tech Stack:
+  • Python 3.12+
+  • anthropic SDK (Claude)
+  • mcp[cli] (Model Context Protocol SDK)
+  • pydantic, pillow, python-dotenv
+  • uv for package management
+
+
+  Key Topics Covered
+
+  Client-side (ch3-4):
+  • stdio and HTTP transports
+  • Tool listing and calling
+  • Resources and prompts
+  • Logging, sampling, roots, elicitations
+  • Multi-model and multi-server setups
+
+  Server-side (ch5-6):
+  • FastMCP and low-level APIs
+  • Tools with structured output
+  • Prompts (single/multi-turn)
+  • Resources and templates
+  • Context objects, progress notifications, pagination
+
+
+  Code Organization
+
+  Each chapter contains numbered examples that build on each other:
+  • Standalone files (e.g., 01_host_no_client.py)
+  • Multi-file subdirectories with agent.py, client.py, and/or server.py
+
+  The calculator_server.py in ch3/ch4 serves as a test server with arithmetic tools, prompts, and resources.
+  The codebase is well-documented with detailed README files for each chapter. Would you like me to look at any specific examples in more detail?
+
+
+```
