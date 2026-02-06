@@ -1,0 +1,317 @@
+<mxfile host="app.diagrams.net" modified="2026-01-27T00:00:00.000Z" agent="Claude" version="21.0.0" type="device">
+  <diagram id="ch4-uml-diagram" name="Chapter 4 - Advanced Client Features">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title" value="Chapter 4: MCP Clients - Advanced Use and Best Practices" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="600" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Subtitle -->
+        <mxCell id="subtitle" value="Progressive Implementation of Client Capabilities" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="450" y="55" width="500" height="25" as="geometry" />
+        </mxCell>
+        
+        <!-- ==================== PROGRESSION FLOW ==================== -->
+        <mxCell id="flow-title" value="Implementation Progression" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="90" width="250" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Step 1: Logging -->
+        <mxCell id="step1" value="&lt;b style=&quot;font-size:14px&quot;&gt;01. Handle Logging&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size:10px&quot;&gt;Implements LoggingFnT protocol&lt;br&gt;&lt;br&gt;Callback: _handle_logs()&lt;br&gt;Receives: LoggingMessageNotificationParams&lt;br&gt;Levels: info, error, critical, alert, emergency&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacing=8;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="40" y="130" width="220" height="130" as="geometry" />
+        </mxCell>
+        
+        <!-- Step 2: Sampling -->
+        <mxCell id="step2" value="&lt;b style=&quot;font-size:14px&quot;&gt;02. Sampling Callback&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size:10px&quot;&gt;Implements SamplingFnT protocol&lt;br&gt;&lt;br&gt;Callback: _handle_sampling()&lt;br&gt;Receives: CreateMessageRequestParams&lt;br&gt;Returns: CreateMessageResult&lt;br&gt;Allows server to request LLM completions&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;spacing=8;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="280" y="130" width="220" height="130" as="geometry" />
+        </mxCell>
+        
+        <!-- Step 3: Roots -->
+        <mxCell id="step3" value="&lt;b style=&quot;font-size:14px&quot;&gt;03. Providing Roots&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size:10px&quot;&gt;Implements RootsFnT protocol&lt;br&gt;&lt;br&gt;Callback: _handle_roots()&lt;br&gt;Returns: ListRootsResult&lt;br&gt;Provides filesystem boundaries&lt;br&gt;Uses file:// URI scheme&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacing=8;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="520" y="130" width="220" height="130" as="geometry" />
+        </mxCell>
+        
+        <!-- Step 4: Elicitations -->
+        <mxCell id="step4" value="&lt;b style=&quot;font-size:14px&quot;&gt;04. Elicitations&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size:10px&quot;&gt;Implements ElicitFnT protocol&lt;br&gt;&lt;br&gt;Callback: _handle_elicitation()&lt;br&gt;Receives: ElicitRequestParams&lt;br&gt;Returns: ElicitResult (accept/decline/cancel)&lt;br&gt;Collects structured user input&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacing=8;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="760" y="130" width="220" height="130" as="geometry" />
+        </mxCell>
+        
+        <!-- Step 5: Multiple Models -->
+        <mxCell id="step5" value="&lt;b style=&quot;font-size:14px&quot;&gt;05. Multiple Models&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size:10px&quot;&gt;InternalTool class for model abstraction&lt;br&gt;&lt;br&gt;Methods:&lt;br&gt;- translate_to_openai()&lt;br&gt;- translate_to_anthropic()&lt;br&gt;&lt;br&gt;Decouples client from LLM provider&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;spacing=8;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="130" width="220" height="130" as="geometry" />
+        </mxCell>
+        
+        <!-- Step 6: Multiple Servers -->
+        <mxCell id="step6" value="&lt;b style=&quot;font-size:14px&quot;&gt;06. Multiple Servers&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size:10px&quot;&gt;Uses ClientSessionGroup&lt;br&gt;&lt;br&gt;Features:&lt;br&gt;- Manages multiple sessions&lt;br&gt;- Automatic tool routing&lt;br&gt;- Aggregated resources/prompts&lt;br&gt;- connect_to_server() per server&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;spacing=8;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="130" width="220" height="130" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrows between steps -->
+        <mxCell id="arr1" value="" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#82b366;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="195" as="sourcePoint" />
+            <mxPoint x="280" y="195" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr2" value="" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#6c8ebf;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="500" y="195" as="sourcePoint" />
+            <mxPoint x="520" y="195" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr3" value="" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#d6b656;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="740" y="195" as="sourcePoint" />
+            <mxPoint x="760" y="195" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr4" value="" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#b85450;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="980" y="195" as="sourcePoint" />
+            <mxPoint x="1000" y="195" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr5" value="" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#9673a6;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1220" y="195" as="sourcePoint" />
+            <mxPoint x="1240" y="195" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- ==================== CLASS DIAGRAMS ==================== -->
+        <mxCell id="class-title" value="Class Diagrams" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="290" width="200" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- MCPClient Class (Single Server) -->
+        <mxCell id="mcp-single" value="&lt;b style=&quot;font-size:14px&quot;&gt;MCPClient&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px;color:#666&quot;&gt;(Single Server - Examples 01-05)&lt;/span&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-size:10px;padding:4px&quot;&gt;&lt;b&gt;Attributes:&lt;/b&gt;&lt;br&gt;- name: str&lt;br&gt;- command: str&lt;br&gt;- server_args: list[str]&lt;br&gt;- env_vars: dict&lt;br&gt;- file_roots: list[str]&lt;br&gt;- _session: ClientSession&lt;br&gt;- _llm_client: Anthropic&lt;br&gt;- _connected: bool&lt;br&gt;&lt;hr&gt;&lt;b&gt;Callbacks (Client Capabilities):&lt;/b&gt;&lt;br&gt;+ _handle_logs()&lt;br&gt;+ _handle_sampling()&lt;br&gt;+ _handle_roots()&lt;br&gt;+ _handle_elicitation()&lt;br&gt;+ _collect_form_data()&lt;br&gt;&lt;hr&gt;&lt;b&gt;MCP Operations:&lt;/b&gt;&lt;br&gt;+ connect()&lt;br&gt;+ disconnect()&lt;br&gt;+ use_tool()&lt;br&gt;+ get_resource()&lt;br&gt;+ load_prompt()&lt;br&gt;+ get_available_tools()&lt;br&gt;+ get_available_resources()&lt;br&gt;+ get_available_prompts()&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="40" y="330" width="250" height="400" as="geometry" />
+        </mxCell>
+        
+        <!-- MCPClient Class (Multi Server) -->
+        <mxCell id="mcp-multi" value="&lt;b style=&quot;font-size:14px&quot;&gt;MCPClient&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px;color:#666&quot;&gt;(Multi Server - Example 06)&lt;/span&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-size:10px;padding:4px&quot;&gt;&lt;b&gt;Attributes:&lt;/b&gt;&lt;br&gt;- name: str&lt;br&gt;- file_roots: list[str]&lt;br&gt;- _llm_client: Anthropic&lt;br&gt;- _session_group: ClientSessionGroup&lt;br&gt;&lt;hr&gt;&lt;b&gt;Key Differences:&lt;/b&gt;&lt;br&gt;- No command/server_args (per connect)&lt;br&gt;- Uses ClientSessionGroup&lt;br&gt;- connect() takes ServerParameters&lt;br&gt;- Callbacks set on connected session&lt;br&gt;&lt;hr&gt;&lt;b&gt;MCP Operations:&lt;/b&gt;&lt;br&gt;+ connect(server_params)&lt;br&gt;+ disconnect() - iterates sessions&lt;br&gt;+ use_tool() - via session_group&lt;br&gt;+ get_available_tools() - returns InternalTool&lt;br&gt;+ get_available_resources() - from dict&lt;br&gt;+ get_available_prompts() - from dict&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="320" y="330" width="250" height="340" as="geometry" />
+        </mxCell>
+        
+        <!-- InternalTool Class -->
+        <mxCell id="internal-tool" value="&lt;b style=&quot;font-size:14px&quot;&gt;InternalTool&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px;color:#666&quot;&gt;(Model Abstraction)&lt;/span&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-size:10px;padding:4px&quot;&gt;&lt;b&gt;Attributes:&lt;/b&gt;&lt;br&gt;- name: str&lt;br&gt;- input_schema: dict&lt;br&gt;- description: str | None&lt;br&gt;&lt;hr&gt;&lt;b&gt;Methods:&lt;/b&gt;&lt;br&gt;+ translate_to_openai() -&gt; dict&lt;br&gt;  Returns: {type, name, description, parameters}&lt;br&gt;&lt;br&gt;+ translate_to_anthropic() -&gt; dict&lt;br&gt;  Returns: {name, description, input_schema}&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="600" y="330" width="250" height="200" as="geometry" />
+        </mxCell>
+        
+        <!-- ==================== CALLBACK PROTOCOLS ==================== -->
+        <mxCell id="proto-title" value="MCP Callback Protocols" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="880" y="290" width="250" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Protocol Box -->
+        <mxCell id="proto-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="880" y="330" width="580" height="400" as="geometry" />
+        </mxCell>
+        
+        <!-- LoggingFnT -->
+        <mxCell id="proto1" value="&lt;b&gt;LoggingFnT&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size:10px&quot;&gt;async def callback(&lt;br&gt;  params: LoggingMessageNotificationParams&lt;br&gt;) -&gt; None&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacing=6;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="900" y="350" width="260" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- SamplingFnT -->
+        <mxCell id="proto2" value="&lt;b&gt;SamplingFnT&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size:10px&quot;&gt;async def callback(&lt;br&gt;  context: RequestContext[ClientSession, None],&lt;br&gt;  params: CreateMessageRequestParams&lt;br&gt;) -&gt; CreateMessageResult | ErrorData&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;spacing=6;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="350" width="260" height="95" as="geometry" />
+        </mxCell>
+        
+        <!-- RootsFnT -->
+        <mxCell id="proto3" value="&lt;b&gt;RootsFnT (ListRootsFnT)&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size:10px&quot;&gt;async def callback(&lt;br&gt;  context: RequestContext[ClientSession, Any]&lt;br&gt;) -&gt; ListRootsResult | ErrorData&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacing=6;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="900" y="450" width="260" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- ElicitFnT -->
+        <mxCell id="proto4" value="&lt;b&gt;ElicitFnT&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size:10px&quot;&gt;async def callback(&lt;br&gt;  context: RequestContext[ClientSession, Any],&lt;br&gt;  params: ElicitRequestParams&lt;br&gt;) -&gt; ElicitResult | ErrorData&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacing=6;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="460" width="260" height="95" as="geometry" />
+        </mxCell>
+        
+        <!-- ClientSession Constructor -->
+        <mxCell id="session-construct" value="&lt;b&gt;ClientSession Constructor Parameters&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-size:10px;padding:4px&quot;&gt;ClientSession(&lt;br&gt;  read_stream=...,&lt;br&gt;  write_stream=...,&lt;br&gt;  &lt;span style=&quot;color:#82b366&quot;&gt;logging_callback=_handle_logs,&lt;/span&gt;&lt;br&gt;  &lt;span style=&quot;color:#6c8ebf&quot;&gt;sampling_callback=_handle_sampling,&lt;/span&gt;&lt;br&gt;  &lt;span style=&quot;color:#d6b656&quot;&gt;list_roots_callback=_handle_roots,&lt;/span&gt;&lt;br&gt;  &lt;span style=&quot;color:#b85450&quot;&gt;elicitation_callback=_handle_elicitation,&lt;/span&gt;&lt;br&gt;)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#333333;align=left;spacing=6;verticalAlign=top;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="900" y="570" width="300" height="145" as="geometry" />
+        </mxCell>
+        
+        <!-- Elicit Actions -->
+        <mxCell id="elicit-actions" value="&lt;b&gt;ElicitResult Actions&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;font-size:10px;padding:4px&quot;&gt;• &lt;b&gt;accept&lt;/b&gt; - User approved, content included&lt;br&gt;• &lt;b&gt;decline&lt;/b&gt; - User rejected request&lt;br&gt;• &lt;b&gt;cancel&lt;/b&gt; - User cancelled (closed dialog)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacing=6;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="570" width="220" height="100" as="geometry" />
+        </mxCell>
+        
+        <!-- ==================== ARCHITECTURE DIAGRAM ==================== -->
+        <mxCell id="arch-title" value="Architecture: Single vs Multi-Server" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="760" width="300" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Single Server Architecture -->
+        <mxCell id="single-arch-box" value="Single Server (Examples 01-05)" style="swimlane;startSize=25;fillColor=#f5f5f5;strokeColor=#666666;rounded=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="40" y="800" width="350" height="180" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="single-client" value="MCPClient" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="single-arch-box">
+          <mxGeometry x="20" y="40" width="100" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="single-session" value="ClientSession" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="single-arch-box">
+          <mxGeometry x="20" y="110" width="100" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="single-server" value="MCP Server" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="single-arch-box">
+          <mxGeometry x="230" y="110" width="100" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="single-arr1" value="" style="endArrow=classic;html=1;strokeWidth=1;" edge="1" parent="single-arch-box">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="70" y="80" as="sourcePoint" />
+            <mxPoint x="70" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="single-arr2" value="stdio/HTTP" style="endArrow=classic;startArrow=classic;html=1;strokeWidth=1;" edge="1" parent="single-arch-box">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="120" y="130" as="sourcePoint" />
+            <mxPoint x="230" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Multi Server Architecture -->
+        <mxCell id="multi-arch-box" value="Multi Server (Example 06)" style="swimlane;startSize=25;fillColor=#ffe6cc;strokeColor=#d79b00;rounded=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="420" y="800" width="450" height="180" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="multi-client" value="MCPClient" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="multi-arch-box">
+          <mxGeometry x="20" y="40" width="100" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="multi-group" value="ClientSessionGroup" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="multi-arch-box">
+          <mxGeometry x="20" y="110" width="120" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="multi-session1" value="Session 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="multi-arch-box">
+          <mxGeometry x="170" y="90" width="70" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="multi-session2" value="Session 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="multi-arch-box">
+          <mxGeometry x="170" y="130" width="70" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="multi-server1" value="Server 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="multi-arch-box">
+          <mxGeometry x="270" y="90" width="70" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="multi-server2" value="Server 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="multi-arch-box">
+          <mxGeometry x="270" y="130" width="70" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="multi-tools" value="Aggregated&lt;br&gt;Tools/Resources/&lt;br&gt;Prompts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" vertex="1" parent="multi-arch-box">
+          <mxGeometry x="360" y="90" width="75" height="70" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="multi-arr1" value="" style="endArrow=classic;html=1;strokeWidth=1;" edge="1" parent="multi-arch-box">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="70" y="80" as="sourcePoint" />
+            <mxPoint x="70" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="multi-arr2" value="" style="endArrow=classic;html=1;strokeWidth=1;" edge="1" parent="multi-arch-box">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="140" y="120" as="sourcePoint" />
+            <mxPoint x="170" y="105" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="multi-arr3" value="" style="endArrow=classic;html=1;strokeWidth=1;" edge="1" parent="multi-arch-box">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="140" y="135" as="sourcePoint" />
+            <mxPoint x="170" y="145" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="multi-arr4" value="" style="endArrow=classic;startArrow=classic;html=1;strokeWidth=1;" edge="1" parent="multi-arch-box">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="240" y="105" as="sourcePoint" />
+            <mxPoint x="270" y="105" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="multi-arr5" value="" style="endArrow=classic;startArrow=classic;html=1;strokeWidth=1;" edge="1" parent="multi-arch-box">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="240" y="145" as="sourcePoint" />
+            <mxPoint x="270" y="145" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="multi-arr6" value="" style="endArrow=classic;html=1;strokeWidth=1;" edge="1" parent="multi-arch-box">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="105" as="sourcePoint" />
+            <mxPoint x="360" y="105" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="multi-arr7" value="" style="endArrow=classic;html=1;strokeWidth=1;" edge="1" parent="multi-arch-box">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="145" as="sourcePoint" />
+            <mxPoint x="360" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- ==================== LEGEND ==================== -->
+        <mxCell id="legend-title" value="Legend" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="900" y="760" width="100" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="900" y="800" width="340" height="180" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="920" y="820" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1-txt" value="Logging Capability" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="970" y="815" width="120" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="920" y="850" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2-txt" value="Sampling Capability" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="970" y="845" width="120" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="920" y="880" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3-txt" value="Roots Capability" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="970" y="875" width="120" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="920" y="910" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg4-txt" value="Elicitation Capability" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="970" y="905" width="120" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg5" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="920" y="940" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg5-txt" value="Multi-Model Support" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="970" y="935" width="120" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg6" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="820" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg6-txt" value="Multi-Server Support" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="815" width="120" height="30" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -33,7 +33,7 @@ async def main():
         await mcp_client.connect()
         available_tools = await mcp_client.get_available_tools()
         print(
-            f"Available tools: {", ".join([tool['name'] for tool in available_tools])}"
+            f"Available tools:::::::::: {", ".join([tool['name'] for tool in available_tools])}"
         )
 
         while True:
@@ -55,6 +55,7 @@ async def main():
                     tools=available_tools,
                     tool_choice={"type": "auto"},
                 )
+                print(f"Current response: {current_response}")
 
                 # Add assistant message to conversation
                 conversation_messages.append(
