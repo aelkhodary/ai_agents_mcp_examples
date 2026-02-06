@@ -1,0 +1,322 @@
+<mxfile host="65bd71144e">
+    <diagram id="mcp-communication-flow" name="MCP Communication Flow">
+        <mxGraphModel dx="1055" dy="1337" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="MCP Communication Flow - UML Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="400" y="20" width="400" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="comp-title" value="Component Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="40" y="70" width="200" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="host-container" value="Host Application" style="swimlane;startSize=30;fillColor=#1ba1e2;strokeColor=#006EAF;rounded=1;fontColor=#ffffff;fontSize=14;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="110" width="380" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="agent" value="&lt;b style=&quot;font-size:12px&quot;&gt;Agent&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;(agent.py)&lt;/span&gt;&lt;hr&gt;&lt;span style=&quot;font-size:9px&quot;&gt;- mcp_client: MCPClient&lt;br&gt;- anthropic_client: Anthropic&lt;br&gt;- available_resources: dict&lt;br&gt;- available_prompts: dict&lt;/span&gt;&lt;hr&gt;&lt;span style=&quot;font-size:9px&quot;&gt;+ run()&lt;br&gt;+ _select_resources()&lt;br&gt;+ _select_prompts()&lt;br&gt;+ _load_selected_resources()&lt;br&gt;+ _load_selected_prompts()&lt;br&gt;+ _refresh()&lt;/span&gt;" style="shape=component;html=1;align=left;spacingLeft=40;rounded=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;whiteSpace=wrap;labelBackgroundColor=none;verticalAlign=top;spacing=4;" parent="host-container" vertex="1">
+                    <mxGeometry x="15" y="40" width="170" height="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="mcpclient" value="&lt;b style=&quot;font-size:12px&quot;&gt;MCPClient&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;(client.py)&lt;/span&gt;&lt;hr&gt;&lt;span style=&quot;font-size:9px&quot;&gt;- _session: ClientSession&lt;br&gt;- _exit_stack: AsyncExitStack&lt;br&gt;- _connected: bool&lt;/span&gt;&lt;hr&gt;&lt;span style=&quot;font-size:9px&quot;&gt;+ connect()&lt;br&gt;+ disconnect()&lt;br&gt;+ use_tool()&lt;br&gt;+ get_resource()&lt;br&gt;+ load_prompt()&lt;br&gt;+ get_available_tools()&lt;br&gt;+ get_available_resources()&lt;br&gt;+ get_available_prompts()&lt;/span&gt;" style="shape=component;html=1;align=left;spacingLeft=40;rounded=1;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;whiteSpace=wrap;verticalAlign=top;spacing=4;" parent="host-container" vertex="1">
+                    <mxGeometry x="200" y="40" width="170" height="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="external-container" value="External Services" style="swimlane;startSize=30;fillColor=#d80073;strokeColor=#A50040;rounded=1;fontColor=#ffffff;fontSize=14;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="110" width="380" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="claude" value="&lt;b style=&quot;font-size:12px&quot;&gt;Claude API&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;(Anthropic)&lt;/span&gt;&lt;hr&gt;&lt;span style=&quot;font-size:9px&quot;&gt;External LLM Service&lt;/span&gt;&lt;hr&gt;&lt;span style=&quot;font-size:9px&quot;&gt;+ messages.create()&lt;/span&gt;" style="shape=component;html=1;align=left;spacingLeft=40;rounded=1;fillColor=#fa6800;strokeColor=#C73500;fontColor=#000000;whiteSpace=wrap;verticalAlign=top;spacing=4;" parent="external-container" vertex="1">
+                    <mxGeometry x="15" y="40" width="160" height="185" as="geometry"/>
+                </mxCell>
+                <mxCell id="server" value="&lt;b style=&quot;font-size:12px&quot;&gt;Calculator Server&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px&quot;&gt;(calculator_server.py)&lt;/span&gt;&lt;hr&gt;&lt;span style=&quot;font-size:9px&quot;&gt;FastMCP Server&lt;br&gt;Transport: stdio&lt;/span&gt;&lt;hr&gt;&lt;span style=&quot;font-size:9px&quot;&gt;Tools: add, subtract,&lt;br&gt;multiply, divide, power,&lt;br&gt;square_root, count_rs,&lt;br&gt;explain_math, signup_math_facts&lt;br&gt;&lt;br&gt;Prompts: calculate_operation&lt;br&gt;&lt;br&gt;Resources: math-constants&lt;/span&gt;" style="shape=component;html=1;align=left;spacingLeft=40;rounded=1;fillColor=#e3c800;strokeColor=#B09500;fontColor=#000000;whiteSpace=wrap;verticalAlign=top;spacing=4;" parent="external-container" vertex="1">
+                    <mxGeometry x="195" y="40" width="170" height="185" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow1" value="uses" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="agent" target="mcpclient" edge="1">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="200" y="220" as="sourcePoint"/>
+                        <mxPoint x="360" y="220" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow2" value="LLM calls&lt;br&gt;(HTTP)" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="agent" target="claude" edge="1">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="120" y="145" as="sourcePoint"/>
+                        <mxPoint x="440" y="200" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="105" y="100"/>
+                            <mxPoint x="400" y="100"/>
+                            <mxPoint x="400" y="200"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow3" value="MCP Protocol&lt;br&gt;(stdio/JSON-RPC)" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="mcpclient" target="server" edge="1">
+                    <mxGeometry x="-0.0189" y="-37" width="160" relative="1" as="geometry">
+                        <mxPoint x="375" y="220" as="sourcePoint"/>
+                        <mxPoint x="535" y="220" as="targetPoint"/>
+                        <mxPoint y="1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq-title" value="Sequence Diagram - Main Interaction Flow" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="40" y="420" width="350" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="user-box" value="&lt;b&gt;User&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="460" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="agent-box" value="&lt;b&gt;Agent&lt;/b&gt;&lt;br&gt;(agent.py)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fa6800;strokeColor=#C73500;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="460" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="client-box" value="&lt;b&gt;MCPClient&lt;/b&gt;&lt;br&gt;(client.py)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="460" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="claude-box" value="&lt;b&gt;Claude API&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#a0522d;strokeColor=#6D1F00;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="460" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="server-box" value="&lt;b&gt;Calculator&lt;/b&gt;&lt;br&gt;&lt;b&gt;Server&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6d8764;strokeColor=#3A5431;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="620" y="460" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="user-line" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 4;strokeWidth=1;strokeColor=#666666;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="100" y="500" as="sourcePoint"/>
+                        <mxPoint x="100" y="1000" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="agent-line" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 4;strokeWidth=1;strokeColor=#666666;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="240" y="500" as="sourcePoint"/>
+                        <mxPoint x="240" y="1000" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="client-line" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 4;strokeWidth=1;strokeColor=#666666;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="380" y="500" as="sourcePoint"/>
+                        <mxPoint x="380" y="1000" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="claude-line" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 4;strokeWidth=1;strokeColor=#666666;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="520" y="500" as="sourcePoint"/>
+                        <mxPoint x="520" y="1000" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="server-line" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 4;strokeWidth=1;strokeColor=#666666;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="660" y="500" as="sourcePoint"/>
+                        <mxPoint x="660" y="1000" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="phase1" value="STARTUP PHASE" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;fontStyle=1;fillColor=#fad7ac;strokeColor=#b46504;fontColor=#FF3333;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="510" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="seq1" value="1. create MCPClient()" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#333333;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="240" y="520" as="sourcePoint"/>
+                        <mxPoint x="380" y="520" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq2" value="2. connect()" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#333333;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="240" y="540" as="sourcePoint"/>
+                        <mxPoint x="380" y="540" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq3" value="3. stdio_client() - spawn subprocess" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#d79b00;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="380" y="560" as="sourcePoint"/>
+                        <mxPoint x="660" y="560" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq4" value="4. initialize (MCP handshake)" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#d79b00;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="380" y="580" as="sourcePoint"/>
+                        <mxPoint x="660" y="580" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq5" value="5. get_available_tools()" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#333333;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="240" y="600" as="sourcePoint"/>
+                        <mxPoint x="380" y="600" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq5b" value="tools/list" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#d79b00;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="380" y="615" as="sourcePoint"/>
+                        <mxPoint x="660" y="615" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq6" value="6. _refresh() - resources/list, prompts/list" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#333333;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="240" y="635" as="sourcePoint"/>
+                        <mxPoint x="380" y="635" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq6b" value="resources/list, prompts/list" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#d79b00;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="380" y="650" as="sourcePoint"/>
+                        <mxPoint x="660" y="650" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="phase2" value="REQUEST HANDLING PHASE" style="text;html=1;strokeColor=#b46504;fillColor=#fad7ac;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;fontStyle=1;fontColor=#FF0000;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="670" width="140" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="seq7" value="7. User input (query)" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#333333;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="100" y="690" as="sourcePoint"/>
+                        <mxPoint x="240" y="690" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq8" value="8. _select_resources() - messages.create()" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#9673a6;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="240" y="710" as="sourcePoint"/>
+                        <mxPoint x="520" y="710" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq9" value="9. _select_prompts() - messages.create()" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#9673a6;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="240" y="730" as="sourcePoint"/>
+                        <mxPoint x="520" y="730" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq10" value="10. get_resource(uri)" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#333333;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="240" y="750" as="sourcePoint"/>
+                        <mxPoint x="380" y="750" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq10b" value="resources/read" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#d79b00;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="380" y="765" as="sourcePoint"/>
+                        <mxPoint x="660" y="765" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq11" value="11. load_prompt(name, args)" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#333333;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="240" y="785" as="sourcePoint"/>
+                        <mxPoint x="380" y="785" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq11b" value="prompts/get" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#d79b00;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="380" y="800" as="sourcePoint"/>
+                        <mxPoint x="660" y="800" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="phase3" value="TOOL USE LOOP" style="text;html=1;strokeColor=#b46504;fillColor=#fad7ac;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;fontStyle=1;fontColor=#990008;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="820" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="loop-box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;dashed=1;strokeWidth=2;" parent="1" vertex="1">
+                    <mxGeometry x="220" y="835" width="460" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="loop-label" value="loop [while stop_reason == 'tool_use']" style="text;html=1;strokeColor=none;fillColor=#f5f5f5;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontStyle=2" parent="1" vertex="1">
+                    <mxGeometry x="225" y="837" width="180" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="seq12" value="12. messages.create(tools, messages)" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#9673a6;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="240" y="865" as="sourcePoint"/>
+                        <mxPoint x="520" y="865" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq13" value="13. response (stop_reason=tool_use)" style="endArrow=open;endFill=0;html=1;strokeWidth=1;strokeColor=#9673a6;dashed=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="520" y="885" as="sourcePoint"/>
+                        <mxPoint x="240" y="885" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq14" value="14. use_tool(name, args)" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#333333;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="240" y="905" as="sourcePoint"/>
+                        <mxPoint x="380" y="905" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq14b" value="tools/call" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#d79b00;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="380" y="920" as="sourcePoint"/>
+                        <mxPoint x="660" y="920" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq15" value="15. tool result" style="endArrow=open;endFill=0;html=1;strokeWidth=1;strokeColor=#d79b00;dashed=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="660" y="940" as="sourcePoint"/>
+                        <mxPoint x="380" y="940" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="phase4" value="FINAL RESPONSE" style="text;html=1;strokeColor=#b46504;fillColor=#fad7ac;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;fontStyle=1;fontColor=#FF0000;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="960" width="160" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="seq16" value="16. response (stop_reason=end_turn)" style="endArrow=open;endFill=0;html=1;strokeWidth=1;strokeColor=#9673a6;dashed=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="520" y="980" as="sourcePoint"/>
+                        <mxPoint x="240" y="980" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="seq17" value="17. Display response" style="endArrow=open;endFill=0;html=1;strokeWidth=1;strokeColor=#333333;dashed=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="240" y="1000" as="sourcePoint"/>
+                        <mxPoint x="100" y="1000" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="legend-title" value="Legend" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="900" y="460" width="100" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="490" width="200" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg1" value="" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#333333;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="915" y="515" as="sourcePoint"/>
+                        <mxPoint x="975" y="515" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="leg1-txt" value="Method call" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="985" y="505" width="100" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg2" value="" style="endArrow=open;endFill=0;html=1;strokeWidth=1;strokeColor=#333333;dashed=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="915" y="540" as="sourcePoint"/>
+                        <mxPoint x="975" y="540" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="leg2-txt" value="Return/Response" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="985" y="530" width="100" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg3" value="" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#9673a6;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="915" y="565" as="sourcePoint"/>
+                        <mxPoint x="975" y="565" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="leg3-txt" value="Claude API call" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="985" y="555" width="100" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg4" value="" style="endArrow=block;endFill=1;html=1;strokeWidth=1;strokeColor=#d79b00;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="915" y="590" as="sourcePoint"/>
+                        <mxPoint x="975" y="590" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="leg4-txt" value="MCP Protocol" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="985" y="580" width="100" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg5" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fa6800;strokeColor=#C73500;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="915" y="610" width="60" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg5-txt" value="Agent" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="985" y="605" width="100" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg6" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="915" y="630" width="60" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg6-txt" value="MCPClient" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="985" y="625" width="100" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg7" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6d8764;strokeColor=#3A5431;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="915" y="650" width="60" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg7-txt" value="Server" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="985" y="645" width="100" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="table-title" value="MCP Protocol Methods Mapping" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="900" y="110" width="250" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="table" value="&lt;table style=&quot;font-size:11px;&quot;&gt;&lt;tr style=&quot;background:#ddd;&quot;&gt;&lt;th&gt;MCPClient Method&lt;/th&gt;&lt;th&gt;MCP Protocol&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;connect()&lt;/td&gt;&lt;td&gt;initialize&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;get_available_tools()&lt;/td&gt;&lt;td&gt;tools/list&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;use_tool()&lt;/td&gt;&lt;td&gt;tools/call&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;get_available_resources()&lt;/td&gt;&lt;td&gt;resources/list&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;get_resource()&lt;/td&gt;&lt;td&gt;resources/read&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;get_available_prompts()&lt;/td&gt;&lt;td&gt;prompts/list&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;load_prompt()&lt;/td&gt;&lt;td&gt;prompts/get&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;disconnect()&lt;/td&gt;&lt;td&gt;close streams&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="text;html=1;strokeColor=#432D57;fillColor=#76608a;overflow=fill;rounded=1;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="140" width="230" height="200" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
