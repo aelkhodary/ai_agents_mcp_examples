@@ -1,0 +1,40 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug agent.py (ch3/13_use_prompt)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/ch3/13_use_prompt/agent.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/ch3/13_use_prompt",
+            "envFile": "${workspaceFolder}/.env",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            },
+            "justMyCode": true
+        },
+        {
+            "name": "Debug Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}",
+            "envFile": "${workspaceFolder}/.env",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            },
+            "justMyCode": true
+        },
+        {
+            "name": "Attach to debugpy",
+            "type": "debugpy",
+            "request": "attach",
+            "connect": {
+            "host": "localhost",
+            "port": 5678
+           }
+        }
+    ]
+}

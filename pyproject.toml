@@ -12,5 +12,10 @@ dependencies = [
     "python-dotenv>=1.1.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "debugpy>=1.8.0",
+]
+
 [tool.ruff]
 line-length = 85
