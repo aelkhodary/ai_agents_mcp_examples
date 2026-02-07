@@ -41,13 +41,33 @@ class MCPClient:
         self._connected: bool = False
         self._llm_client = llm_client
 
+    # async def _handle_logs(self, params: LoggingMessageNotificationParams) -> None:
+    #     """
+    #     Log handler that simply prints log messages to the console, implementing the
+    #     LoggingFnT protocol.
+    #     """
+    #     if params.level in ("info", "error", "critical", "alert", "emergency"):
+    #         print(f"[{params.level}] - {params.data}")
+
     async def _handle_logs(self, params: LoggingMessageNotificationParams) -> None:
         """
-        Log handler that simply prints log messages to the console, implementing the
-        LoggingFnT protocol.
+        Enhanced log handler to demonstrate when the server-initiated logging
+        callback is triggered. Adheres to the LoggingFnT protocol.
+
         """
+
+        # Print debug directly so it always shows, regardless of logger config
+        print(f"(DEBUG) Logging callback triggered by server: level={params.level}, data={params.data!r}")
+
         if params.level in ("info", "error", "critical", "alert", "emergency"):
+            logger.info(
+                f"Handled server log in callback: level={params.level} | message={params.data!r}"
+            )
             print(f"[{params.level}] - {params.data}")
+        else:
+            # Show even unhandled levels for demonstration purposes
+            print(f"(DEBUG) Server log received but not shown: level={params.level} | message={params.data!r}")
+
 
     async def _handle_sampling(
         self,

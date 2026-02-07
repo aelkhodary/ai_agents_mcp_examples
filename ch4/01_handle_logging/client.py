@@ -35,11 +35,25 @@ class MCPClient:
 
     async def _handle_logs(self, params: LoggingMessageNotificationParams) -> None:
         """
-        Log handler that simply prints log messages to the console, implementing the
-        LoggingFnT protocol.
+        Enhanced log handler to demonstrate when the server-initiated logging
+        callback is triggered. Adheres to the LoggingFnT protocol.
+
+        Note: By default, logger.debug messages may not show in the terminal
+        unless the logging level is set to DEBUG and a handler outputs to the console.
+        This handler uses print as a fallback for visibility.
         """
+
+        # Print debug directly so it always shows, regardless of logger config
+        print(f"(DEBUG) Logging callback triggered by server: level={params.level}, data={params.data!r}")
+
         if params.level in ("info", "error", "critical", "alert", "emergency"):
+            logger.info(
+                f"Handled server log in callback: level={params.level} | message={params.data!r}"
+            )
             print(f"[{params.level}] - {params.data}")
+        else:
+            # Show even unhandled levels for demonstration purposes
+            print(f"(DEBUG) Server log received but not shown: level={params.level} | message={params.data!r}")
 
     async def connect(self) -> None:
         """
